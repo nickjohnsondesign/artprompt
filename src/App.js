@@ -122,12 +122,6 @@ function App() {
     return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
   };
 
-  const changeDay = () => {
-    const currentDay = new Date().getDate();
-    localStorage.setItem('day', currentDay.toString());
-    setSelectedFont(getRandomFont(selectedFont)); // Change font when "Change Day" is clicked
-  };
-
   const promptStyle = {
     fontFamily: selectedFont,
   };
@@ -137,7 +131,6 @@ function App() {
       <div className="centered-prompt" style={promptStyle}>
         <p>{promptContent}</p>
       </div>
-      <button onClick={changeDay}>Change Day</button>
     </div>
   );
 }
