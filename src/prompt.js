@@ -7,6 +7,13 @@ const prompts = [
   'Prompt 3',
   'Frog Knight',
   'A Burning Stick',
+  'Neon Alleyway',
+  'Brain Blast',
+  'Burning arrow',
+  'Misty Lake',
+  'Chapstick Roll',
+  'Bandit',
+  
 ];
 
 function Prompt() {
