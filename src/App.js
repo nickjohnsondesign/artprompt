@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
+import Prompt from './prompt'; // Assuming you've named your Prompt component file 'Prompt.js'
+
 
 const importedFonts = [
   'Alexandria',
@@ -26,11 +28,12 @@ function getRandomFont(previousFont) {
   } while (randomFont === previousFont);
   return randomFont;
 }
-
 function App() {
-  const [promptContent, setPromptContent] = useState('This is the prompt content');
   const [selectedFont, setSelectedFont] = useState(getRandomFont(''));
 
+  // Use the promptContent from the Prompt component as the initial value
+  const [promptContent, setPromptContent] = useState(<Prompt data={prompts} />);
+  
   const getRandomDarkColor = () => {
     const h = Math.floor(Math.random() * 360); // Random hue
     const s = Math.floor(Math.random() * 100); // Random saturation
