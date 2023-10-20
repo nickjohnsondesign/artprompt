@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400&family=Arimo:wght@400;500&family=Comfortaa:wght@300;400&family=Frank+Ruhl+Libre&family=Noto+Sans+Tamil:wght@300;400&family=Nunito:ital,wght@1,200;1,400&family=Oswald&family=Roboto:wght@300&family=Saira+Semi+Condensed:wght@100&family=Scada:ital,wght@1,700&family=Staatliches&family=Syne&family=Zen+Kaku+Gothic+New:wght@300;400;700&family=Zen+Maru+Gothic&family=Zilla+Slab:wght@300;400&display=swap');
 .centered-prompt {
     font-family: 'Alexandria', 'Arimo', sans-serif; /* Fallback to sans-serif if none of the fonts are available */
@@ -23,7 +23,6 @@ body {
   margin: 0;
   padding: 0;
 }
-=======
   .centered-prompt {
     position: absolute;
     top: 50%;
@@ -47,4 +46,4 @@ body {
   margin: 0;
   padding: 0;
 }
->>>>>>> bc38d588f319f594fc09f864aaef0b78c1ae6f4a
+
