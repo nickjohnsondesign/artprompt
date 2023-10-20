@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './prompt.css'; // You can create a CSS file for styling
+import Font from './Font';
+import Color from './Color';
+import PromptStyle from './PromptStyle';
 
 const prompts = [
   'Frog Knight',
@@ -13,7 +16,6 @@ const prompts = [
   'Mysterious Doorway',
   'Enchanted Forest',
   'Time Traveler',
-  'Ancient Ruins',
   'Secret Agent',
   'Lost Treasure',
   'Glowing Crystal',
@@ -32,29 +34,35 @@ const prompts = [
   'Robotic Companion',
   'Moon Base Adventure',
 ];
+
 function Prompt() {
   const [promptContent, setPromptContent] = useState('');
+  const [selectedFont, setSelectedFont] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [showPromptContent, setShowPromptContent] = useState(false);
 
   useEffect(() => {
     const currentDate = new Date();
     const dayOfYear = getDayOfYear(currentDate);
-
-    // Use the day of the year to select a prompt from the list
     const promptIndex = dayOfYear % prompts.length;
     setPromptContent(prompts[promptIndex]);
+    setLoading(false);
+  }, []);
+
+  useEffect(() => {
+    setShowPromptContent(true);
   }, []);
 
   return (
     <div className="prompt-overlay">
-      <div className="prompt-box">
-        <p>{promptContent}</p>
-      </div>
+      <Font setSelectedFont={setSelectedFont} />
+      {!loading && <PromptStyle selectedFont={selectedFont} promptContent={promptContent} />}
+      <Color setPromptContent={setPromptContent} showPromptContent={showPromptContent} />
     </div>
   );
 }
 
 function getDayOfYear(date) {
-  // Calculate the day of the year (1-366)
   const start = new Date(date.getFullYear(), 0, 0);
   const diff = date - start;
   const oneDay = 1000 * 60 * 60 * 24;
