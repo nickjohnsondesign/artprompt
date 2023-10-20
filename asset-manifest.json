@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/artprompt/static/css/main.014abda6.css",
-    "main.js": "/artprompt/static/js/main.a50c73aa.js",
+    "main.js": "/artprompt/static/js/main.cdb12edf.js",
     "index.html": "/artprompt/index.html",
     "main.014abda6.css.map": "/artprompt/static/css/main.014abda6.css.map",
-    "main.a50c73aa.js.map": "/artprompt/static/js/main.a50c73aa.js.map"
+    "main.cdb12edf.js.map": "/artprompt/static/js/main.cdb12edf.js.map"
   },
   "entrypoints": [
     "static/css/main.014abda6.css",
-    "static/js/main.a50c73aa.js"
+    "static/js/main.cdb12edf.js"
   ]
 }
