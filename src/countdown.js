@@ -33,8 +33,8 @@ const Countdown = () => {
   }, []);
 
   return (
-    <div>
-      <p>Time until next prompt: {timeLeft.hours}:{timeLeft.minutes}:{timeLeft.seconds}</p>
+    <div class="countdown">
+      <p>Next Prompt In: {timeLeft.hours}:{timeLeft.minutes}:{timeLeft.seconds}</p>
     </div>
   );
 };
