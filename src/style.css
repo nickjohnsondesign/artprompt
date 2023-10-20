@@ -1,0 +1,23 @@
+  .centered-prompt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 5em;
+    padding: 20px;
+    border-radius: 5px;
+
+  }
+  .App {
+    height: 100vh;
+    width: 100vw;
+
+   
+  }
+  html,
+body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}

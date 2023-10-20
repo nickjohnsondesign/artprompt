@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import './style.css';
 
 function App() {
+  const [promptContent, setPromptContent] = useState('This is the prompt content.');
+
+  const updatePrompt = (newContent) => {
+    setPromptContent(newContent);
+  };
+
+  const updateColors = () => {
+    const newTextAndBorderColor = '#000000'; // Black color
+
+    document.body.style.color = newTextAndBorderColor;
+    localStorage.setItem('textColor', newTextAndBorderColor);
+
+    updatePromptText(newTextAndBorderColor);
+  };
+
+  useEffect(() => {
+    updateColors();
+  }, []);
+
+  const updatePromptText = (color) => {
+    document.querySelector('.centered-prompt').style.color = color;
+  };
+
+  const changeDay = () => {
+    const currentDay = new Date().getDate();
+    localStorage.setItem('day', currentDay.toString());
+    window.location.reload();
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="centered-prompt">
+        <p>{promptContent}</p>
+      </div>
+      <button onClick={changeDay}>Change Day</button>
     </div>
   );
 }
