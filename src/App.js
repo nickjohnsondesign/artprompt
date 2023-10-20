@@ -32,8 +32,7 @@ function App() {
   const [selectedFont, setSelectedFont] = useState(getRandomFont(''));
 
   // Use the promptContent from the Prompt component as the initial value
-  const [promptContent, setPromptContent] = useState(<Prompt data={prompts} />);
-  
+  const [promptContent, setPromptContent] = useState(<Prompt />);
   const getRandomDarkColor = () => {
     const h = Math.floor(Math.random() * 360); // Random hue
     const s = Math.floor(Math.random() * 100); // Random saturation

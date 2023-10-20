@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './prompt.css'; // You can create a CSS file for styling
 
 const prompts = [
-  'Prompt 1',
-  'Prompt 2',
-  'Prompt 3',
   'Frog Knight',
   'A Burning Stick',
   'Neon Alleyway',
@@ -13,31 +10,40 @@ const prompts = [
   'Misty Lake',
   'Chapstick Roll',
   'Bandit',
-  
+  'Mysterious Doorway',
+  'Enchanted Forest',
+  'Time Traveler',
+  'Ancient Ruins',
+  'Secret Agent',
+  'Lost Treasure',
+  'Glowing Crystal',
+  'Pirate Ship',
+  'Haunted Mansion',
+  'Underwater City',
+  'Space Odyssey',
+  'Wild West Duel',
+  'Magic Elixir',
+  'Jungle Expedition',
+  'Steampunk Inventor',
+  'Alien Encounter',
+  'Sorcerer\'s Apprentice',
+  'Cursed Amulet',
+  'Parallel Universe',
+  'Robotic Companion',
+  'Moon Base Adventure',
 ];
-
 function Prompt() {
   const [promptContent, setPromptContent] = useState('');
 
   useEffect(() => {
-    const lastPromptIndex = parseInt(localStorage.getItem('lastPromptIndex')) || 0;
-    const lastDisplayedDate = localStorage.getItem('lastDisplayedDate');
-    const currentDate = new Date().toISOString().split('T')[0];
+    const currentDate = new Date();
+    const dayOfYear = getDayOfYear(currentDate);
 
-    // Check if the date has changed
-    if (lastDisplayedDate !== currentDate) {
-      // Calculate the index of the next prompt
-      const nextPromptIndex = (lastPromptIndex + 1) % prompts.length;
-
-      // Set the new prompt content and update the last displayed prompt index and date
-      setPromptContent(prompts[nextPromptIndex]);
-      localStorage.setItem('lastPromptIndex', nextPromptIndex.toString());
-      localStorage.setItem('lastDisplayedDate', currentDate);
-    } else {
-      // If the date hasn't changed, set the prompt to the last displayed one
-      setPromptContent(prompts[lastPromptIndex]);
-    }
+    // Use the day of the year to select a prompt from the list
+    const promptIndex = dayOfYear % prompts.length;
+    setPromptContent(prompts[promptIndex]);
   }, []);
+
   return (
     <div className="prompt-overlay">
       <div className="prompt-box">
@@ -46,4 +52,13 @@ function Prompt() {
     </div>
   );
 }
+
+function getDayOfYear(date) {
+  // Calculate the day of the year (1-366)
+  const start = new Date(date.getFullYear(), 0, 0);
+  const diff = date - start;
+  const oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay);
+}
+
 export default Prompt;
