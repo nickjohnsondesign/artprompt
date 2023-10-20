@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/artprompt/static/css/main.9a4af4f4.css",
+    "main.js": "/artprompt/static/js/main.5107202b.js",
+    "index.html": "/artprompt/index.html",
+    "main.9a4af4f4.css.map": "/artprompt/static/css/main.9a4af4f4.css.map",
+    "main.5107202b.js.map": "/artprompt/static/js/main.5107202b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9a4af4f4.css",
+    "static/js/main.5107202b.js"
+  ]
+}
