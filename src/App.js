@@ -7,6 +7,9 @@ import PromptStyle from './PromptStyle';
 import Countdown from './countdown';
 import BottomBar from './bottombar';
 import Overlay from './Overlay'; // Import the Overlay component
+import NightMode from './NightMode';
+import { getRandomLightColor } from './colorUtils';
+import { getRandomDarkColor } from './colorUtils';
 
 function App() {
   const [selectedFont, setSelectedFont] = useState('');
@@ -14,10 +17,23 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [showPromptContent, setShowPromptContent] = useState(false);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isNightMode, setIsNightMode] = useState(false);
+  const [textColor, setTextColor] = useState(''); // Separate state for text color
 
-  const promptStyle = {
-    fontFamily: selectedFont,
-  };
+  // Read night mode preference from localStorage when the component mounts
+  useEffect(() => {
+    const storedNightMode = localStorage.getItem('nightMode');
+    if (storedNightMode !== null) {
+      setIsNightMode(JSON.parse(storedNightMode));
+    }
+  }, []);
+
+  // Pass setPromptContent to the Color component at the beginning
+  const colorComponent = isNightMode ? (
+    <Color setTextColor={setTextColor} isNightMode={isNightMode} />
+  ) : (
+    <Color setTextColor={setTextColor} />
+  );
 
   useEffect(() => {
     setLoading(false);
@@ -35,19 +51,32 @@ function App() {
     setIsOverlayOpen(false);
   };
 
+  const toggleNightMode = () => {
+    const newNightMode = !isNightMode;
+    setIsNightMode(newNightMode);
+
+    // Store the night mode preference in localStorage
+    localStorage.setItem('nightMode', JSON.stringify(newNightMode));
+  };
+
+  const promptStyle = {
+    fontFamily: selectedFont,
+    color: isNightMode ? 'white' : textColor, // Use textColor state for text color
+    backgroundColor: isNightMode ? 'black' : 'white',
+  };
+
   return (
-    <div className="App">
-      <div className="centered-prompt" style={promptStyle}>
-        {showPromptContent ? <p>{promptContent}</p> : null}
-      </div>
+    <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
+      <NightMode isNightMode={isNightMode} toggleNightMode={toggleNightMode} />
+      {isNightMode ? null : (
+        <div className="centered-prompt" style={promptStyle}>
+          {showPromptContent ? <p>{promptContent}</p> : null}
+        </div>
+      )}
       <Countdown />
-      <Color setPromptContent={setPromptContent} showPromptContent={showPromptContent} />
-      <Prompt setPromptContent={setPromptContent} />
-      
-      {/* Include the BottomBar component with the openOverlay function */}
+      {colorComponent} {/* Render the Color component here */}
+      <Prompt setPromptContent={setPromptContent} key={isNightMode ? 'night-mode' : 'light-mode'} />
       <BottomBar openOverlay={openOverlay} />
-      
-      {/* Include the Overlay component with isOpen and closeOverlay props */}
       <Overlay isOpen={isOverlayOpen} closeOverlay={closeOverlay} />
     </div>
   );
