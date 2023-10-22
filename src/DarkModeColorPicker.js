@@ -1,22 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getRandomDarkColor, getContrastRatio } from './colorUtils';
 
+
 const DarkModeColorPicker = ({ setPromptContent, showPromptContent, isNightMode }) => {
+  const [backgroundColor, setBackgroundColor] = useState(null);
+
   useEffect(() => {
-    let randomColor = getRandomDarkColor();
+    // Function to check the contrast ratio between two colors
+    const hasSufficientContrast = (color1, color2) => {
+      return getContrastRatio(color1, color2) >= 20; // Adjust this value as needed
+    };
+    const pickColorWithSufficientContrast = () => {
+      let randomColor = getRandomDarkColor();
 
-    if (isNightMode) {
-      // In dark mode, adjust the lightness to get a brighter color
-      randomColor = modifyColorLightness(randomColor, 80); // Increase the lightness value
-    }
+      if (isNightMode) {
+        randomColor = modifyColorLightness(randomColor, 90); // Increase the lightness value
+      }
 
-    while (getContrastRatio(randomColor, '#ffffff') < 4.5) {
-      randomColor = getRandomDarkColor();
-    }
+      while (!hasSufficientContrast(randomColor, '#000000')) {
+        randomColor = getRandomDarkColor();
+        if (isNightMode) {
+          randomColor = modifyColorLightness(randomColor, 90); // Adjust the lightness value
+        }
+      }
+
+      return randomColor;
+    };
+
+    const newBackgroundColor = pickColorWithSufficientContrast();
 
     // Set the body background color instead of text color
-    document.body.style.backgroundColor = randomColor;
-    localStorage.setItem('backgroundColor', randomColor);
+    document.body.style.backgroundColor = newBackgroundColor;
+    localStorage.setItem('backgroundColor', newBackgroundColor);
+    setBackgroundColor(newBackgroundColor);
 
     if (showPromptContent) {
       setPromptContent('');

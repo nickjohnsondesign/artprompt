@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400&family=Arimo:wght@400;500&family=Comfortaa:wght@300;400&family=Frank+Ruhl+Libre&family=Noto+Sans+Tamil:wght@300;400&family=Nunito:ital,wght@1,200;1,400&family=Oswald&family=Roboto:wght@100;300&family=Saira+Semi+Condensed:wght@100&family=Scada:ital,wght@1,700&family=Staatliches&family=Syne&family=Zen+Kaku+Gothic+New:wght@300;400;700&family=Zen+Maru+Gothic&family=Zilla+Slab:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400&family=Arimo:wght@400;500&family=Bebas+Neue&family=Comfortaa:wght@300;400&family=Frank+Ruhl+Libre&family=Inter:wght@300&family=Jost:wght@300&family=Kanit:wght@100;200&family=Noto+Sans+Osmanya&family=Noto+Sans+Tamil:wght@300;400&family=Nunito:ital,wght@1,200;1,400&family=Oswald&family=Outfit:wght@300&family=Questrial&family=Roboto:wght@100;300&family=Saira+Semi+Condensed:wght@100&family=Scada:ital,wght@1,700&family=Staatliches&family=Syne&family=Urbanist:wght@200&family=Yantramanav:wght@300&family=Zen+Kaku+Gothic+New:wght@300;400;700&family=Zen+Maru+Gothic&family=Zilla+Slab:wght@300;400&display=swap');
 .centered-prompt {
   font-family: 'Alexandria', 'Arimo', sans-serif;
   position: absolute;
@@ -11,10 +11,10 @@
   border-radius: 5px;
   white-space: nowrap;
 }
-
-.night-mode .centered-prompt {
-  /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);  */
-
+@media (min-width: 1440px) {
+  .centered-prompt {
+    font-size: 7em; /* Adjust the font size for 1440p screens */
+  }
 }
 .App {
     height: 100vh;
@@ -112,27 +112,103 @@ html, body {
   background-color: #0056b3; /* Darker blue on hover */
 }
 .night-mode {
-  background-color: rgb(4, 1, 10);
+  background-color: rgb(2, 0, 7);
+  
+}
+.night-mode-toggle {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px;
+}
+
+/* Hide the default checkbox */
+.night-mode-toggle input[type="checkbox"] {
+  display: none;
+}
+
+/* Styles for the slider track */
+.night-mode-toggle .slider {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  background-color: #a0a0a0; /* Track color in day mode */
+  border-radius: 26px;
+  transition: background-color 0.3s ease;
   
 }
 
-/* Add styles for the night mode toggle switch */
-.night-mode-toggle {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Styles for the slider thumb (circle) */
+.night-mode-toggle .slider::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: #ffffff; /* Thumb color in day mode */
+  top: 2px;
+  left: 2px;
+  transition: left 0.3s ease; /* Add this line */
 }
 
-.night-mode-toggle label {
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  color: white;
+/* Styles for the slider thumb when in night mode */
+.night-mode-toggle input[type="checkbox"]:checked ~ .slider .slider::before {
+  left: 26px; /* Move the thumb to the right when in night mode */
+  background-color: #000; /* Thumb color in night mode */
 }
 
-.night-mode-toggle input {
-  margin-left: 10px;
+/* Styles for day mode */
+.night-mode-toggle.day ~ .slider {
+ 
+}
+
+.night-mode-toggle.day input[type="checkbox"]:checked ~ .slider .slider::before {
+  left: 2px; /* Move the thumb to the left when in day mode */
+
+}
+
+/* Styles for night mode */
+.night-mode-toggle.night ~ .slider {
+  background-color: #222; /* Track color in night mode */
+  transition: left 0.3s ease; 
+}
+
+.night-mode-toggle.night input[type="checkbox"]:checked ~ .slider .slider::before {
+  left: 26px; /* Move the thumb to the right when in night mode */
+  background-color: #000; /* Thumb color in night mode */
+}
+/* Define the animation */
+@keyframes slide {
+  0% { left: 2px; }
+  100% { left: 26px; }
+}
+
+.night-mode-toggle.night .slider::before {
+  animation: slide 0.3s forwards;
+}
+
+.night-mode-toggle.day .slider::before {
+  animation: slide 0.3s forwards reverse;
+}
+
+/* Add these classes to the slider when it's clicked or checked */
+.night-mode-toggle .slider.clicked::before {
+  transition: left 0.3s ease;
+}
+
+.night-mode-toggle .slider.checked::before {
+  transition: left 0.3s ease;
+}
+.prompt-header{
+  font-family: 'Alexandria', 'Arimo', sans-serif;
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 2em;
+  padding: 20px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 50%;
 }

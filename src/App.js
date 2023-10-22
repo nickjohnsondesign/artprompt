@@ -10,6 +10,7 @@ import Overlay from './Overlay'; // Import the Overlay component
 import NightMode from './NightMode';
 import { getRandomLightColor } from './colorUtils';
 import { getRandomDarkColor } from './colorUtils';
+import PromptHeader from './prompthead'; // Import the PromptHeader component
 
 function App() {
   const [selectedFont, setSelectedFont] = useState('');
@@ -34,7 +35,9 @@ function App() {
   ) : (
     <Color setTextColor={setTextColor} />
   );
-
+  useEffect(() => {
+    document.querySelector('.slider').classList.toggle('checked');
+  }, [isNightMode]);
   useEffect(() => {
     setLoading(false);
   }, [promptContent]);
@@ -67,17 +70,20 @@ function App() {
 
   return (
     <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
-      <NightMode isNightMode={isNightMode} toggleNightMode={toggleNightMode} />
+      <NightMode isNightMode={isNightMode} toggleNightMode={toggleNightMode} key={isNightMode ? 'night' : 'day'} />
+
       {isNightMode ? null : (
         <div className="centered-prompt" style={promptStyle}>
           {showPromptContent ? <p>{promptContent}</p> : null}
         </div>
       )}
       <Countdown />
+      <PromptHeader /> 
       {colorComponent} {/* Render the Color component here */}
       <Prompt setPromptContent={setPromptContent} key={isNightMode ? 'night-mode' : 'light-mode'} />
       <BottomBar openOverlay={openOverlay} />
       <Overlay isOpen={isOverlayOpen} closeOverlay={closeOverlay} />
+      
     </div>
   );
 }

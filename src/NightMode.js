@@ -1,14 +1,23 @@
+// NightMode.js
 import React from 'react';
 
-const NightMode = ({ isNightMode, toggleNightMode }) => {
+import { getRandomLightColor, getRandomDarkColor } from './colorUtils';
+
+const NightMode = ({ isNightMode, toggleNightMode, textColor }) => {
+  const handleToggle = () => {
+    toggleNightMode();
+  };
+
   return (
-    <div className="night-mode-toggle">
-      <label>
-        Night Mode
-        <input type="checkbox" checked={isNightMode} onChange={toggleNightMode} />
-      </label>
+    <div className={`night-mode-toggle ${isNightMode ? 'night' : 'day'}`}>
+      <input
+        type="checkbox"
+        id="night-mode-toggle"
+        checked={isNightMode}
+        onChange={handleToggle}
+      />
+      <label htmlFor="night-mode-toggle" className={`slider ${isNightMode ? 'checked' : ''}`} style={{ '--track-color': textColor }}></label>
     </div>
   );
 };
-
 export default NightMode;
