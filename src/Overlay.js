@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './style.css';
 function Overlay({ isOpen, closeOverlay }) {
   if (!isOpen) {
     return null;

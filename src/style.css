@@ -42,6 +42,8 @@ html, body {
 .bottom-bar {
     position: fixed;
     bottom: 0;
+    padding-left: 20px;
+    padding-right: 20px;
     left: 0;
     width: 98%;
     display: flex;
@@ -262,4 +264,37 @@ html, body {
 
 .glow {
   box-shadow: 0 0 100px rgba(52, 152, 219, 0.7);
+}
+@keyframes slide-down {
+  0% {
+    top: 200px;
+    opacity: 0; /* Add this line */
+  }
+  100% {
+    top: -200px; /* Change this value as needed */
+    opacity: 1; /* Add this line */
+  }
+}
+
+.message-box {
+  position: absolute;
+  top: -200px;
+  right:  20px;
+  width: 350px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: left;
+  font-size: 1.25em;
+  animation: slide-down 0.25s ease-out forwards;
+    transition: all 0.5s ease-out, opacity 0.5s ease-out; /* Add this line */
+    
+}
+
+.message-box:hover {
+  top: 20px; /* Change this value as needed */
+  opacity: 1; /* Add this line */
+} 
+.night-mode .message-box {
+  border-color: black; /* Border color in night mode */
 }

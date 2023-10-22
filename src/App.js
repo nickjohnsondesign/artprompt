@@ -6,7 +6,7 @@ import Color from './Color';
 import PromptStyle from './PromptStyle';
 import Countdown from './countdown';
 import BottomBar from './bottombar';
-import Overlay from './Overlay'; // Import the Overlay component
+import Overlay from './Overlay';
 import NightMode from './NightMode';
 import { getRandomLightColor } from './colorUtils';
 import { getRandomDarkColor } from './colorUtils';
@@ -22,6 +22,7 @@ function App() {
   const [isNightMode, setIsNightMode] = useState(false);
   const [textColor, setTextColor] = useState('');
   const [showCircles, setShowCircles] = useState(false); // Control visibility of Circles
+  
 
   // Read night mode preference from localStorage when the component mounts
   useEffect(() => {
@@ -75,6 +76,7 @@ function App() {
   };
 
   return (
+    
     <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
       <NightMode isNightMode={isNightMode} toggleNightMode={toggleNightMode} key={isNightMode ? 'night' : 'day'} />
       {showCircles && <Circles isNightMode={isNightMode} />}
@@ -89,7 +91,7 @@ function App() {
       <PromptHeader />
       <PromptHeader /> 
       {colorComponent}
-
+      <div className="message-box"></div>
       <div className="background-animation-container">
         <div className="background"></div>
       </div>
