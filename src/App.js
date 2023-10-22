@@ -11,6 +11,7 @@ import NightMode from './NightMode';
 import { getRandomLightColor } from './colorUtils';
 import { getRandomDarkColor } from './colorUtils';
 import PromptHeader from './prompthead'; // Import the PromptHeader component
+import Circles from './Circles'; 
 
 function App() {
   const [selectedFont, setSelectedFont] = useState('');
@@ -19,15 +20,26 @@ function App() {
   const [showPromptContent, setShowPromptContent] = useState(false);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [isNightMode, setIsNightMode] = useState(false);
-  const [textColor, setTextColor] = useState(''); // Separate state for text color
+  const [textColor, setTextColor] = useState('');
+  const [showCircles, setShowCircles] = useState(false); // Control visibility of Circles
 
   // Read night mode preference from localStorage when the component mounts
   useEffect(() => {
     const storedNightMode = localStorage.getItem('nightMode');
     if (storedNightMode !== null) {
       setIsNightMode(JSON.parse(storedNightMode));
+      setShowCircles(JSON.parse(storedNightMode)); // Show circles in night mode
     }
   }, []);
+
+  const toggleNightMode = () => {
+    const newNightMode = !isNightMode;
+    setIsNightMode(newNightMode);
+    setShowCircles(newNightMode); // Toggle visibility of circles
+
+    // Store the night mode preference in localStorage
+    localStorage.setItem('nightMode', JSON.stringify(newNightMode));
+  };
 
   // Pass setPromptContent to the Color component at the beginning
   const colorComponent = isNightMode ? (
@@ -35,9 +47,11 @@ function App() {
   ) : (
     <Color setTextColor={setTextColor} />
   );
+
   useEffect(() => {
     document.querySelector('.slider').classList.toggle('checked');
   }, [isNightMode]);
+  
   useEffect(() => {
     setLoading(false);
   }, [promptContent]);
@@ -54,14 +68,6 @@ function App() {
     setIsOverlayOpen(false);
   };
 
-  const toggleNightMode = () => {
-    const newNightMode = !isNightMode;
-    setIsNightMode(newNightMode);
-
-    // Store the night mode preference in localStorage
-    localStorage.setItem('nightMode', JSON.stringify(newNightMode));
-  };
-
   const promptStyle = {
     fontFamily: selectedFont,
     color: isNightMode ? 'white' : textColor, // Use textColor state for text color
@@ -71,15 +77,23 @@ function App() {
   return (
     <div className={`App ${isNightMode ? 'night-mode' : ''}`}>
       <NightMode isNightMode={isNightMode} toggleNightMode={toggleNightMode} key={isNightMode ? 'night' : 'day'} />
-
-      {isNightMode ? null : (
+      {showCircles && <Circles isNightMode={isNightMode} />}
+      {isNightMode ? null : 
         <div className="centered-prompt" style={promptStyle}>
           {showPromptContent ? <p>{promptContent}</p> : null}
         </div>
-      )}
+      }
       <Countdown />
+      {/* Render the Circles component when showCircles is true */}
+      {isNightMode && showCircles ? <Circles /> : null}
+      <PromptHeader />
       <PromptHeader /> 
-      {colorComponent} {/* Render the Color component here */}
+      {colorComponent}
+
+      <div className="background-animation-container">
+        <div className="background"></div>
+      </div>
+
       <Prompt setPromptContent={setPromptContent} key={isNightMode ? 'night-mode' : 'light-mode'} />
       <BottomBar openOverlay={openOverlay} />
       <Overlay isOpen={isOverlayOpen} closeOverlay={closeOverlay} />
@@ -87,5 +101,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

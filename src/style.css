@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400&family=Arimo:wght@400;500&family=Bebas+Neue&family=Comfortaa:wght@300;400&family=Frank+Ruhl+Libre&family=Inter:wght@300&family=Jost:wght@300&family=Kanit:wght@100;200&family=Noto+Sans+Osmanya&family=Noto+Sans+Tamil:wght@300;400&family=Nunito:ital,wght@1,200;1,400&family=Oswald&family=Outfit:wght@300&family=Questrial&family=Roboto:wght@100;300&family=Saira+Semi+Condensed:wght@100&family=Scada:ital,wght@1,700&family=Staatliches&family=Syne&family=Urbanist:wght@200&family=Yantramanav:wght@300&family=Zen+Kaku+Gothic+New:wght@300;400;700&family=Zen+Maru+Gothic&family=Zilla+Slab:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400&family=Archivo:wght@300&family=Arimo:wght@400;500&family=Barlow+Semi+Condensed:wght@200&family=Bebas+Neue&family=Comfortaa:wght@300;400&family=DM+Sans:opsz,wght@9..40,300&family=Days+One&family=Frank+Ruhl+Libre&family=Inter+Tight:wght@300&family=Inter:wght@300&family=Jost:wght@300&family=Kanit:wght@100;200&family=League+Spartan:wght@300&family=Noto+Sans+Osmanya&family=Noto+Sans+Tamil:wght@300;400&family=Nunito:ital,wght@1,200;1,400&family=Oswald&family=Outfit:wght@300&family=Poppins:wght@200&family=Questrial&family=Roboto:wght@100;300&family=Saira+Semi+Condensed:wght@100&family=Scada:ital,wght@1,700&family=Staatliches&family=Syne&family=Urbanist:wght@200&family=Yantramanav:wght@300&family=Zen+Kaku+Gothic+New:wght@300;400;700&family=Zen+Maru+Gothic&family=Zilla+Slab:wght@300;400&display=swap');
 .centered-prompt {
   font-family: 'Alexandria', 'Arimo', sans-serif;
   position: absolute;
@@ -13,7 +13,7 @@
 }
 @media (min-width: 1440px) {
   .centered-prompt {
-    font-size: 7em; /* Adjust the font size for 1440p screens */
+    font-size: 10em; /* Adjust the font size for 1440p screens */
   }
 }
 .App {
@@ -29,9 +29,14 @@ html, body {
 .countdown{
     font-family: 'Roboto', sans-serif;
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, 100%);
+}
+@media (min-width: 1440px) {
+.countdown{
+  font-size: 1.5em;
+}
 }
 /* Position Author on the bottom-left */
 .bottom-bar {
@@ -202,7 +207,7 @@ html, body {
 .prompt-header{
   font-family: 'Alexandria', 'Arimo', sans-serif;
   position: absolute;
-  top: 42%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -211,4 +216,50 @@ html, body {
   border-radius: 5px;
   white-space: nowrap;
   opacity: 50%;
+}
+@media (min-width: 1440px) {
+  .prompt-header{
+    font-size: 3em;
+  }
+}
+.circle {
+  position: absolute;
+  background-color: #3498db;
+  border-radius: 50%;
+  animation: expand 3s linear infinite, move 3s linear infinite;
+}
+
+@keyframes expand {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes move {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-100px);
+  }
+}
+
+@keyframes interact {
+  0%, 100% {
+    background-color: #e74c3c;
+  }
+  50% {
+    background-color: #3498db;
+  }
+}
+/* styles.css */
+
+.glow {
+  box-shadow: 0 0 100px rgba(52, 152, 219, 0.7);
 }
