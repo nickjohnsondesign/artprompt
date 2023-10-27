@@ -9,7 +9,7 @@
   font-size: 5em;
   padding: 20px;
   border-radius: 5px;
-  white-space: nowrap;
+  white-space: nowrap
 }
 @media (min-width: 1440px) {
   .centered-prompt {

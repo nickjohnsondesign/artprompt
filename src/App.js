@@ -21,10 +21,10 @@ function App() {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [isNightMode, setIsNightMode] = useState(false);
   const [textColor, setTextColor] = useState('');
-  const [showCircles, setShowCircles] = useState(false); // Control visibility of Circles
+  const [showCircles, setShowCircles] = useState(false); 
   
 
-  // Read night mode preference from localStorage when the component mounts
+ 
   useEffect(() => {
     const storedNightMode = localStorage.getItem('nightMode');
     if (storedNightMode !== null) {
