@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './prompt.css'; // You can create a CSS file for styling
 import Font from './Font';
 import Color from './Color';
 import PromptStyle from './PromptStyle';

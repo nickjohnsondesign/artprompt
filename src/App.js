@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './style.css';
+import './appstyle.css'; 
+import './mobilestyle.css'; 
 import Prompt from './prompt';
 import Font from './Font';
 import Color from './Color';

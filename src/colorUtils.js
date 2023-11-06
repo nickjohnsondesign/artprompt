@@ -1,6 +1,4 @@
-// colorUtils.js
 
-// Function to generate a random dark color
 export const getRandomLightColor = () => {
     let color;
     do {
